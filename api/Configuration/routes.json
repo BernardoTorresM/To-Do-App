@@ -1,0 +1,84 @@
+{
+    "user": {
+        "get users": {
+            "route": "/user",
+            "methods": [
+                "GET"
+            ]
+        },
+        "register user": {
+            "route": "/user",
+            "methods": [
+                "POST"
+            ],
+            "values": [
+                "email",
+                "password"
+            ]
+        },
+        "delete user": {
+            "route": "/user",
+            "methods": [
+                "DELETE"
+            ],
+            "values": [
+                "email",
+                "password"
+            ]
+        },
+        "update user": {
+            "route": "/user",
+            "methods": [
+                "PATCH",
+                "PUT"
+            ],
+            "values": [
+                "old_email",
+                "old_password",
+                "new_email",
+                "new_password"
+            ]
+        }
+    },
+    "tasks": {
+        "get tasks": {
+            "route": "/<user email>/tasks",
+            "methods": [
+                "GET"
+            ]
+        },
+        "create task": {
+            "route": "/tasks",
+            "methods": [
+                "POST"
+            ],
+            "values": [
+                "name",
+                "description",
+                "email"
+            ]
+        },
+        "update task": {
+            "route": "/tasks",
+            "methods": [
+                "PATCH",
+                "PUT"
+            ],
+            "values": [
+                "id",
+                "name",
+                "description",
+                "done"
+            ]
+        },
+        "delete task": {
+            "route": "/tasks",
+            "methods": [
+                "DELETE"
+            ],
+            "values": [
+                "id"
+            ]
+        }
+    }
+}

@@ -3,3 +3,9 @@
 api/venv
 api/__pychache__/
 api/.idea
+
+api/Util/__pycache__/
+
+api/Model/__pycache__/
+
+api/Controller/__pycache__/
