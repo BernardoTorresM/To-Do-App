@@ -1,0 +1,5 @@
+/.git
+/.idea
+api/venv
+api/__pychache__/
+api/.idea
