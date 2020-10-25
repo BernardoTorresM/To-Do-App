@@ -1,36 +1,56 @@
-// define DOM variables
-let addTodoBtn = document.getElementById('addTodo');
-let input = document.getElementById('input');
-let todoContainer = document.getElementById('todoContainer');
-let form = document.getElementById('form');
+// display actual date
+const dateDisplay = document.getElementById('date');
+const actualDate = new Date();
 
-let todoCount = 1;
+const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
+                "Octubre", "Noviembre", "Diciembre"];
 
-// add todos
-addTodoBtn.addEventListener('click', () => {
-    // prevent page refresh when submit
-    form.addEventListener('submit', event => event.preventDefault());
+dateDisplay.innerText = 
+`${dias[actualDate.getDay()]}, ${actualDate.getDate()} de ${meses[actualDate.getMonth()]} del ${actualDate.getFullYear()}`;
 
-    // create todo
-    let todo = document.createElement('p');
-    todo.innerText = `${todoCount++}.-${input.value}`;
-    
-    // add "done" function
-    todo.addEventListener('click', () => {
-        if(todo.style.textDecoration == "line-through")
-            todo.style.textDecoration = "none";    
-        else 
-            todo.style.textDecoration = "line-through";
+
+// add task
+const inputAdd = document.getElementById('add-input');
+const btnAdd = document.getElementById('add-btn');
+let taskContainer = document.getElementById('task-container');
+
+function addDoneFn (){
+    const tasks = taskContainer.querySelectorAll('.task-description');
+    tasks.forEach(task => { 
+        task.addEventListener('click',  () => {
+            task.querySelector('.done-btn').classList.toggle('done');
+            task.querySelector('.task-text').classList.toggle('done');
+        });
     });
+}
 
-    // add "delete" function
-    todo.addEventListener('dblclick', () => todoContainer.removeChild(todo));
+function addDelete(){
+    const deleteBtns = taskContainer.querySelectorAll('.delete-btn');
+    deleteBtns.forEach(deleteBtn => {
+        deleteBtn.addEventListener('click', () => {
+           taskContainer.removeChild(deleteBtn.parentNode);
+        });
+    });
+}
 
-    // append todo in todoContainer
-    todoContainer.appendChild(todo);
-    input.value = "";
+btnAdd.addEventListener('click', () => {
+    taskContainer.innerHTML +=  
+    `<div class="task">
+        <div class="task-description">
+            <div class="done-btn"></div>
+            <span class="task-text">${inputAdd.value}</span> 
+        </div>
+
+        <i class="fas fa-trash delete-btn"></i>
+    </div>`;
+
+    addDoneFn();
+    addDelete();
+    inputAdd.value = "";
 });
 
-
-// local storage
-let storage = window.localStorage;
+window.addEventListener("DOMContentLoaded",  () => {
+    addDoneFn();
+    addDelete();
+});
